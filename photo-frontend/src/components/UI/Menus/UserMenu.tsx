@@ -11,7 +11,6 @@ import Tooltip from '@mui/material/Tooltip';
 import Logout from '@mui/icons-material/Logout';
 import { IUser } from '@/interfaces/IUser';
 import { useNavigate } from 'react-router-dom';
-import AddBoxIcon from '@mui/icons-material/AddBox';
 
 interface Props {
   user: IUser;
@@ -87,20 +86,8 @@ export default function UserMenu({ user, logout }: Props) {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem>
-          <Avatar /> Profile
-        </MenuItem>
         <MenuItem onClick={() => {navigate('/')}}>
-          <ListItemIcon>
-            <AddBoxIcon fontSize="small" />
-          </ListItemIcon>
-          A
-        </MenuItem>
-        <MenuItem onClick={() => {navigate('/')}}>
-          <ListItemIcon>
-            <AddBoxIcon fontSize="small" />
-          </ListItemIcon>
-          A
+          <Avatar /> My Profile
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleLogout}>
