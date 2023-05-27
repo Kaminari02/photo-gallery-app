@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from "react-router-dom";
-import { Grid, Card, CardHeader, CardActions, CardMedia, Button, CardContent, IconButton } from '@mui/material';
+import { Grid, Card, CardHeader, CardActions, CardMedia, Button, CardContent, IconButton, Link } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { apiUrl } from '@/common/constants';
 import { useParams } from 'react-router-dom';
@@ -25,17 +24,17 @@ const PhotoItem = ({ title, image, _id, author, deletePhoto, authorId, openModal
   }
   return (
     <Grid sx={{marginTop: 5}} item xs={12} sm={12} md={6} lg={4} minWidth={350}>
-      <Card sx={{ height: "100%", maxWidth: 345 }}>
+      <Card sx={{ height: "100%", maxWidth: 345, margin: 'auto' }}>
         <CardContent sx={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
          {id ? author._id === authorId 
                       ? <IconButton onClick={deletePhoto} aria-label="delete"><DeleteIcon /></IconButton> 
                       : null
           : null}
          </CardContent>
-        {cardImage ? <CardMedia sx={{ height: 350 }} image={cardImage} title={title} /> : null}
-        <CardHeader title={`Author: ${author}`} />
+        {cardImage ? <CardMedia sx={{ height: 230, objectFit: 'contain' }} image={cardImage} title={title} /> : null}
+        <CardHeader title={`Author: ${author.username}`} />
         <CardActions>
-          <Button onClick={openModal} sx={{ bgcolor: '#4caf50', color: '#fff', margin: 1, "&:hover": { bgcolor: '#81c784' } }}>{title}</Button>
+         <Link onClick={openModal} href={'#'}>{title}</Link>
         </CardActions>
       </Card>
     </Grid>

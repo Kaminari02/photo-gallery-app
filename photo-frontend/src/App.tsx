@@ -6,6 +6,7 @@ import { useAppSelector } from './hooks/reduxHooks';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import Register from './containers/Register/Register';
 import Login from './containers/Login/Login';
+import Photos from './containers/Photos/Photos';
 
 const App = () => {
   const { user } = useAppSelector(state => state.auth);
@@ -18,6 +19,7 @@ const App = () => {
     <main>
       <Container maxWidth="xl">
         <Routes>
+        <Route path="/" element={<Photos/>} />
         <Route path='/register' element={(
               <ProtectedRoute isAllowed={!user} redirectPath='/'>
                 <Register/>
