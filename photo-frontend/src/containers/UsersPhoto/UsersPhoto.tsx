@@ -15,7 +15,7 @@ const UserPhoto = () => {
     const [modalImage, setModalImage] = useState('')
     const [open, setOpen] = useState(false);
     const [deletePhoto] = useDeletePhotoMutation();
-    const handleDelete = async (id: string) => {
+    const handleDelete = async (id: string): Promise<void> => {
         await deletePhoto(id)
     }
 
@@ -74,6 +74,7 @@ const UserPhoto = () => {
             <Grid item container direction="row" spacing={1}>
                 {photos && photos.map(photo => (
                     <PhotoItem
+                        deletePhoto={() => { handleDelete(photo._id)}}
                         key={photo._id}
                         _id={photo._id}
                         title={photo.title}
@@ -81,7 +82,6 @@ const UserPhoto = () => {
                         author={photo.author}
                         authorId={user ? user._id : undefined}
                         openModal={() => { openModal(photo) }}
-                        deletePhoto={() => { handleDelete(photo._id) }}
                     />
                 ))}
             </Grid>

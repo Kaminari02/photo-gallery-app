@@ -26,14 +26,14 @@ const PhotoItem = ({ title, image, author, deletePhoto, authorId, openModal }: P
   }
   return (
     <Grid sx={{marginTop: 5}} item xs={12} sm={12} md={6} lg={4} minWidth={350}>
-      <Card onClick={openModal} sx={{ height: "100%", maxWidth: 345, margin: 'auto', cursor: 'pointer' }}>
+      <Card sx={{ height: "100%", maxWidth: 345, margin: 'auto', cursor: 'pointer' }}>
         <CardContent sx={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}>
          {id ? author._id === authorId 
-                      ? <IconButton onClick={deletePhoto} aria-label="delete"><DeleteIcon /></IconButton> 
+                      ? <IconButton sx={{fontSize: 18}} onClick={deletePhoto} aria-label="delete"><DeleteIcon /> Delete</IconButton> 
                       : null
           : null}
          </CardContent>
-        {cardImage ? <CardMedia sx={{ height: 230, objectFit: 'contain' }} image={cardImage} title={title} /> : null}
+        {cardImage ? <CardMedia onClick={openModal} sx={{ height: 230, objectFit: 'contain' }} image={cardImage} title={title} /> : null}
         {id ? null : <CardHeader onClick={() => {navigate(`/users/${author._id}`)}} sx={{textDecoration: 'underline', color: '#4caf50'}} title={`Author: ${author.username}`} />}
         
         <CardActions>

@@ -78,8 +78,13 @@ controller.delete(
   "/:id", authMiddleware, async (req: IRequest, res: Response) => {
     const { id } = req.params;
     try {
-        const reqPhoto = await Photo.findOneAndDelete({author: req.user._id})
-        res.send(reqPhoto);
+        const reqPhoto = await Photo.find({_id: id, author: req.user._id});
+        if(reqPhoto) {
+            const result = await Photo.deleteOne({_id: id})
+            res.send(result)
+        } else {
+            return res.status(404).send({error: 'User not found'});
+        }
     } catch (error) {
       res.status(404).send("Error");
     }
