@@ -8,6 +8,7 @@ import Register from './containers/Register/Register';
 import Login from './containers/Login/Login';
 import Photos from './containers/Photos/Photos';
 import UserPhoto from './containers/UsersPhoto/UsersPhoto';
+import NewPhoto from './containers/NewPhoto/NewPhoto';
 
 const App = () => {
   const { user } = useAppSelector(state => state.auth);
@@ -22,6 +23,11 @@ const App = () => {
         <Routes>
         <Route path="/" element={<Photos/>} />
         <Route path="/users/:id" element={<UserPhoto/>} />
+        <Route path='/photos/new' element={(
+              <ProtectedRoute isAllowed={!!user} redirectPath='/'>
+                <NewPhoto/>
+              </ProtectedRoute>
+            )} />
         <Route path='/register' element={(
               <ProtectedRoute isAllowed={!user} redirectPath='/'>
                 <Register/>

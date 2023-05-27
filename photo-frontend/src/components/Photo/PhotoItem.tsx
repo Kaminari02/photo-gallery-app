@@ -37,7 +37,7 @@ const PhotoItem = ({ title, image, author, deletePhoto, authorId, openModal }: P
         {id ? null : <CardHeader onClick={() => {navigate(`/users/${author._id}`)}} sx={{textDecoration: 'underline', color: '#4caf50'}} title={`Author: ${author.username}`} />}
         
         <CardActions>
-            <Link onClick={openModal} href={'#'}>{title}</Link>
+            <Link sx={{marginLeft: 1}} onClick={openModal} href={'#'}>{title}</Link>
         </CardActions>
       </Card>
     </Grid>

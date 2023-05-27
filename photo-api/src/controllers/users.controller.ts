@@ -8,7 +8,7 @@ controller.get(
       try {
         const { id } = req.params;
         if (id) {
-          const result = await Photo.find({author: id}).populate('author');
+          const result = await Photo.find({author: id}).populate('author').sort({date: -1});
             if (result) {
               res.send(result);
             } else {

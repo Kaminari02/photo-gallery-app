@@ -23,7 +23,7 @@ const upload = multer({ storage });
 
 controller.get("/", async (req: Request, res: Response) => {
   try {
-    const photos = await Photo.find().populate('author');
+    const photos = await Photo.find().populate('author').sort({date: -1});
     res.send(photos);
   } catch (e) {
     res.sendStatus(500);
@@ -39,6 +39,9 @@ controller.post(
       let image = "";
       if (req.file) {
         image = req.file.filename;
+      }
+      if(!title || !image) {
+        return res.status(500).send({error: 'You have to fill all fields'});
       }
       const photo = new CreatePhotoDto(title, image, req.user._id);
       const result = new Photo(photo);

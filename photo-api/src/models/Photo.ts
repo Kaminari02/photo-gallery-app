@@ -13,6 +13,10 @@ const PhotoSchema = new Schema({
     type: Schema.Types.ObjectId,
     required: true,
     ref: 'user'
+  },
+  date: {
+    type: Date,
+    default: () => new Date().toISOString()
   }
 });
 

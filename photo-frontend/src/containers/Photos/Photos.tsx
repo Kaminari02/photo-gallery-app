@@ -21,6 +21,7 @@ const Photos = () => {
 
   return (
     <Grid sx={{ marginBottom: 5 }} container direction="column" spacing={2}>
+      {photos && photos.length === 0 ? <Grid xs item><Typography variant="h3" gutterBottom>No Albums yet</Typography></Grid> : null}
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={open}
@@ -36,7 +37,7 @@ const Photos = () => {
               <CardMedia
                 component="img"
                 alt="image"
-                height="340"
+                height="440"
                 image={`${apiUrl}/uploads/${modalImage}`}
               />
             </Card>
