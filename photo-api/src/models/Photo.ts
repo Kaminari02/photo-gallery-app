@@ -16,6 +16,6 @@ const PhotoSchema = new Schema({
   }
 });
 
-const Photo = model("artist", PhotoSchema);
+const Photo = model("photo", PhotoSchema);
 
 export default Photo;
