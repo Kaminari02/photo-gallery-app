@@ -1,9 +1,10 @@
 import React from 'react';
-import { Grid, Card, CardHeader, CardActions, CardMedia, Button, CardContent, IconButton, Link } from '@mui/material';
+import { Grid, Card, CardHeader, CardActions, CardMedia, CardContent, IconButton, Link } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { apiUrl } from '@/common/constants';
 import { useParams } from 'react-router-dom';
 import { IAuthor } from '@/interfaces/IAuthor';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   title: string;
@@ -11,11 +12,12 @@ interface Props {
   _id: string
   author: IAuthor;
   authorId: string;
-  deletePhoto?: () => Promise<void>;
+  deletePhoto?: () => void;
   openModal: () => void
 }
 
-const PhotoItem = ({ title, image, _id, author, deletePhoto, authorId, openModal }: Props) => {
+const PhotoItem = ({ title, image, author, deletePhoto, authorId, openModal }: Props) => {
+  const navigate = useNavigate();
   let cardImage;
   const { id } = useParams();
 
@@ -32,7 +34,8 @@ const PhotoItem = ({ title, image, _id, author, deletePhoto, authorId, openModal
           : null}
          </CardContent>
         {cardImage ? <CardMedia sx={{ height: 230, objectFit: 'contain' }} image={cardImage} title={title} /> : null}
-        <CardHeader title={`Author: ${author.username}`} />
+        {id ? null : <CardHeader onClick={() => {navigate(`/users/${author._id}`)}} sx={{textDecoration: 'underline', color: '#4caf50'}} title={`Author: ${author.username}`} />}
+        
         <CardActions>
             <Link onClick={openModal} href={'#'}>{title}</Link>
         </CardActions>

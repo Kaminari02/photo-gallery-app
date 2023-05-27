@@ -86,7 +86,7 @@ export default function UserMenu({ user, logout }: Props) {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem onClick={() => {navigate('/')}}>
+        <MenuItem onClick={() => {navigate('/users/' + user._id)}}>
           <Avatar /> My Profile
         </MenuItem>
         <Divider />

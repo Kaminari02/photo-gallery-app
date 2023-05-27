@@ -59,7 +59,7 @@ const Photos = () => {
             title={photo.title}
             image={photo.image}
             author={photo.author}
-            authorId={user._id}
+            authorId={user ? user._id : undefined}
             openModal={() => { openModal(photo) }}
           />
         ))}
