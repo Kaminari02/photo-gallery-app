@@ -4,7 +4,8 @@ import cors from "cors";
 import mongoose from "mongoose";
 import process from "process";
 import userAuthController from '@src/controllers/auth.controller';
-import photoController from '@src/controllers/photos.controller'
+import photoController from '@src/controllers/photos.controller';
+import usersController from '@src/controllers/users.controller';
 
 const app = express();
 const PORT = 8000;
@@ -29,5 +30,6 @@ app.use(cors());
 // Controllers
 app.use('/auth', userAuthController);
 app.use('/photos', photoController);
+app.use('/users', usersController);
 
 run().catch((e) => logger.err(e)); 
