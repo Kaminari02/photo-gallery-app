@@ -8,7 +8,7 @@ const photoApi = api.injectEndpoints({
       providesTags: ["Photo"],
     }),
     getPhotoById: build.query<IPhoto, string>({
-        query: (id) => `/photos/:${id}`
+        query: (id) => `/photos/${id}`
     }),
     addPhoto: build.mutation<IPhoto, FormData>({
       query: (body) => ({
@@ -29,4 +29,4 @@ const photoApi = api.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useAddPhotoMutation, useDeletePhotoMutation, useGetPhotoByIdQuery, useGetPhotosQuery } = photoApi;
+export const { useAddPhotoMutation, useDeletePhotoMutation, useLazyGetPhotoByIdQuery, useGetPhotosQuery } = photoApi;

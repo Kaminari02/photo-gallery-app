@@ -9,8 +9,7 @@ import {
 } from 'redux-persist';
 import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2';
 import {api} from './services/index';
-import authReducer from '@/store/features/authSlice';
-import photoReducer from '@/store/features/contactSlice' 
+import authReducer from '@/store/features/authSlice'; 
 
 const persistConfig = {
   key: 'root',
@@ -23,7 +22,6 @@ const persistConfig = {
 const rootReducer = combineReducers({
   [api.reducerPath]: api.reducer,
   auth: authReducer,
-  photo: photoReducer
 })
 
 const persistedReducer = persistReducer<any, AnyAction>(persistConfig, rootReducer);

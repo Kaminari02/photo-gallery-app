@@ -1,40 +1,49 @@
 import React, { useState } from 'react';
-import { Typography, Grid, Snackbar, Alert } from '@mui/material';
+import { Typography, Grid, Snackbar, Alert, Card, CardMedia, CardActions, Button, Backdrop } from '@mui/material';
 import PhotoItem from '@/components/Photo/PhotoItem';
-import { useAppSelector, useAppDispatch } from '@/hooks/reduxHooks';
-import { useGetPhotosQuery, useGetPhotoByIdQuery } from '@/store/services/photos';
-import { setPhotoData } from '@/store/features/contactSlice';
+import { useAppSelector } from '@/hooks/reduxHooks';
+import { useGetPhotosQuery } from '@/store/services/photos';
+import { apiUrl } from '@/common/constants';
+import { IPhoto } from '@/interfaces/IPhoto';
 
 const Photos = () => {
-  const dispatch = useAppDispatch();
   const { data: photos } = useGetPhotosQuery();
   const { user } = useAppSelector(state => state.auth);
-  const { photo } = useAppSelector(state => state.photo)
+  const [modalImage, setModalImage] = useState('')
   const [open, setOpen] = useState(false);
   const handleClose = () => {
     setOpen(false);
   }
-  const openModal = (id: string) => {
+  const openModal = async (photo: IPhoto) => {
     setOpen(true);
-    const index = photos && photos.findIndex(item => item._id === id);
-    if (photos && index) {
-      const photo = { ...photos[index] }
-      dispatch(setPhotoData(photo))
-    }
+    setModalImage(photo.image)
   }
 
   return (
     <Grid sx={{ marginBottom: 5 }} container direction="column" spacing={2}>
-      <Snackbar
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={open}
-        autoHideDuration={3000}
-        onClose={handleClose}
+        onClick={handleClose}
       >
-        <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          open={open}
+          onClose={handleClose}
+        >
+          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+            <Card sx={{ maxWidth: 600 }}>
+              <CardMedia
+                component="img"
+                alt="image"
+                height="340"
+                image={`${apiUrl}/uploads/${modalImage}`}
+              />
+            </Card>
+          </Alert>
+        </Snackbar>
+      </Backdrop>
 
-        </Alert>
-      </Snackbar>
       <Grid item container direction="row">
         <Grid item>
           <Typography variant="h4">
@@ -51,8 +60,7 @@ const Photos = () => {
             image={photo.image}
             author={photo.author}
             authorId={user._id}
-            openModal={() => {openModal(photo._id) }}
-            deletePhoto={() => { }}
+            openModal={() => { openModal(photo) }}
           />
         ))}
       </Grid>
