@@ -5,6 +5,7 @@ import { Theme } from '@mui/material/styles';
 import { useAppSelector } from '@/hooks/reduxHooks';
 import UserMenu from './Menus/UserMenu';
 import AnonymousMenu from './Menus/AnonymousMenu';
+import { useLogoutMutation } from '@/store/services/auth';
 
 const useStyles = makeStyles<Theme>(theme => ({
   mainLink: {
@@ -22,7 +23,8 @@ const useStyles = makeStyles<Theme>(theme => ({
 const AppToolbar = () => {
   const classes = useStyles();
   const { user } = useAppSelector(state => state.auth);
-  
+  const [logout] = useLogoutMutation();
+
   const handleLogout = async() => {
     await logout();
   }
