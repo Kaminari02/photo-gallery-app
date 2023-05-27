@@ -79,11 +79,11 @@ controller.delete(
     const { id } = req.params;
     try {
         const reqPhoto = await Photo.find({_id: id, author: req.user._id});
-        if(reqPhoto) {
+        if(reqPhoto.length > 0) {
             const result = await Photo.deleteOne({_id: id})
             res.send(result)
         } else {
-            return res.status(404).send({error: 'User not found'});
+            return res.status(404).send({error: 'Invalid user information'});
         }
     } catch (error) {
       res.status(404).send("Error");
